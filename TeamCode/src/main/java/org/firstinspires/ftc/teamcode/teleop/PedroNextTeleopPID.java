@@ -24,12 +24,12 @@ import dev.nextftc.ftc.components.BulkReadComponent;
 import dev.nextftc.hardware.driving.DriverControlledCommand;
 
 
-@TeleOp(name = "NextFTC Pedro Teleop")
+@TeleOp(name = "NextFTC Pedro Teleop PID")
 public class PedroNextTeleopPID extends NextFTCOpMode {
     boolean intakeOn = false;
 
-    double launcherRPMGoal = 750;
-    double launcherRPM;
+    double closeVel = -1270.0;
+    double farVel = -1540.0;
 
     public PedroNextTeleopPID(){
         addComponents(
@@ -43,8 +43,8 @@ public class PedroNextTeleopPID extends NextFTCOpMode {
     @Override
     public void onUpdate() {
         BindingManager.update();
-        launcherRPM = LauncherPID.INSTANCE.getLauncherRPM();
-        telemetry.addData("Launcher RPM", launcherRPM);
+//        launcherRPM = LauncherPID.INSTANCE.getLauncherRPM();
+//        telemetry.addData("Launcher Vel Goal", launcherVelGoal);
         telemetry.update();
     }
 
@@ -84,29 +84,29 @@ public class PedroNextTeleopPID extends NextFTCOpMode {
         Button launcherButton = button(() -> gamepad2.y)
                 .toggleOnBecomesTrue()
                 .whenBecomesTrue(() -> {
-                    LauncherPID.INSTANCE.setLauncherRPM(launcherRPMGoal).schedule();
-                    telemetry.addData("Launcher RPM Goal", launcherRPMGoal );
-                    telemetry.update();
+                    LauncherPID.INSTANCE.setLauncherVel(closeVel).schedule();
+//                    telemetry.addData("Launcher RPM Goal", launcherRPMGoal );
+//                    telemetry.update();
                 })
                 .whenBecomesFalse(() -> {
-                    LauncherPID.INSTANCE.setLauncherRPM(0.0).schedule();
-                    telemetry.addData("Launcher RPM Goal", 0.0 );
-                    telemetry.update();
+                    LauncherPID.INSTANCE.stopLauncher.schedule();
+//                    telemetry.addData("Launcher RPM Goal", 0.0 );
+//                    telemetry.update();
                 });
 
         Button increaseLauncherSpeed = button(() -> gamepad2.dpad_up).and(() -> gamepad2.left_bumper)
                 .whenBecomesTrue(() -> {
-                    launcherRPMGoal += 10.0;
-                    LauncherPID.INSTANCE.setLauncherRPM(launcherRPMGoal).schedule();
-                    telemetry.addData("Launcher RPM Goal", launcherRPMGoal );
-                    telemetry.update();
+//                    LauncherPID.INSTANCE.farLauncher.schedule();
+//                    launcherVelGoal -= 10.0;
+                    LauncherPID.INSTANCE.setLauncherVel(farVel).schedule();
                 });
         Button decreaseLauncherSpeed = button(() -> gamepad2.dpad_down).and(() -> gamepad2.left_bumper)
                 .whenBecomesTrue(() -> {
-                    launcherRPMGoal -= 10.0;
-                    LauncherPID.INSTANCE.setLauncherRPM(launcherRPMGoal).schedule();
-                    telemetry.addData("Launcher RPM Goal", launcherRPMGoal );
-                    telemetry.update();
+//                    LauncherPID.INSTANCE.closeLauncher.schedule();
+//                    launcherVelGoal += 10.0;
+                    LauncherPID.INSTANCE.setLauncherVel(closeVel).schedule();
+//                    telemetry.addData("Launcher RPM Goal", launcherRPMGoal );
+//                    telemetry.update();
                 });
 
 //        Button farLauncherButton = button(() -> gamepad2.b)

@@ -23,10 +23,10 @@ public class Launcher implements Subsystem {
 
 
 //    MotorGroup launcherGroup = new MotorGroup(
-//            new MotorEx("top_launcher").reversed().floatMode(),
-//            new MotorEx("bottom_launcher").reversed().floatMode()
+//            new MotorEx("launcher").reversed().floatMode(),
+//            new MotorEx("launcher").reversed().floatMode()
 //    );
-    private final MotorEx launcherMotor = new MotorEx("bottom_launcher").reversed().floatMode();
+    private final MotorEx launcherMotor = new MotorEx("launcher").reversed().floatMode();
 
 //    private final ControlSystem controlSystem = ControlSystem.builder()
 //            .velPid(0.005,0,0)

@@ -11,9 +11,9 @@ public class Feeder implements Subsystem {
 
     private ServoEx servo = new ServoEx("feeder");
 
-    public Command down = new SetPosition(servo, 0.4).requires(this);
+    public Command down = new SetPosition(servo, 0.9).requires(this);
     public Command up = new SequentialGroup(
-            new SetPosition(servo, 0.1).requires(this).thenWait(0.2),
-            new SetPosition(servo, 0.4).requires(this).thenWait(0.2)
+            new SetPosition(servo, 0.4).requires(this).thenWait(0.2),
+            new SetPosition(servo, 0.9).requires(this).thenWait(0.2)
             );
 }

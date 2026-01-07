@@ -81,7 +81,7 @@ public class PedroRedFarSmall extends NextFTCOpMode {
         return new SequentialGroup(
 //                LauncherPID.INSTANCE.setLauncherPower(0.7).thenWait(7.0),
              //   new FollowPath(startToShoot, true, 0.7),
-                LauncherPID.INSTANCE.setLauncherRPM(750.0).thenWait(10.0),
+                LauncherPID.INSTANCE.setLauncherVel(500.0).thenWait(10.0),
                 Feeder.INSTANCE.up, // Shoot 1st preload
                 Intake.INSTANCE.startIntake.thenWait(1.0),
                 Intake.INSTANCE.stopIntake.thenWait(4.0),
